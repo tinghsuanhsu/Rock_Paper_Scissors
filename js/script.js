@@ -53,6 +53,13 @@ and computerSelection - and then return a string that declares the
     }
   }
    
-  const playerSelection = "rock";
-  const computerSelection = getComputerChoice();
-  console.log(playRound(playerSelection, computerSelection));
+  function game(){
+    for (let i = 0; i < 5; i++){
+        const playerSelection = "Rock"
+        const computerSelection = getComputerChoice()
+        playRound(playerSelection, computerSelection)
+    }
+  }
+
+//   console.log(playRound(playerSelection, computerSelection));
+game()
