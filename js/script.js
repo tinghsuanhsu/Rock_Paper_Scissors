@@ -9,26 +9,18 @@ function getComputerChoice(){
 // Convert paper, rock and scissors to numbers for easier comparison 
 function convertChoice(choice){
     switch(choice){
-        case 1:
-            "PAPER"
-            break
-        case 2:
-            "SISSORS"
-            break
-        case 3:
-            "ROCK"
-            break
-        } 
-    }
+        case "PAPER":
+            return 1
+        case "SCISSORS":
+            return 2
+        case "ROCK":
+            return 3
+    } 
+}
 
+// A function that plays a single round of Rock Paper Scissors. 
 
-/* A function that plays a single round of Rock Paper Scissors. 
-The function should take two parameters - the playerSelection 
-and computerSelection - and then return a string that declares the
- winner of the round like so: "You Lose! Paper beats Rock"
- */
-
- function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
     // Change the selection to uppercase
     let playerSelectionUpper = playerSelection.toUpperCase()
     // Change the selection to uppercase
@@ -43,6 +35,9 @@ and computerSelection - and then return a string that declares the
     // Calculate the differences between computer's choice and player's choice
     let playResult = computerSelectionNumber - playerSelectionNumber
 
+    // Keep player's score
+    let playerScore = 0
+
     // Evaluate the differences to determine who wins and print out the round
     if (playResult > 1 || playResult === -2){ 
         console.log("You Lose! " + computerSelection + " Beat " + playerSelection)
@@ -50,16 +45,25 @@ and computerSelection - and then return a string that declares the
         console.log("Draw! You both play " + computerSelection)
     } else {
         console.log("You Win! " + playerSelection + " Beat " + computerSelection)
+        ++playerScore
     }
-  }
-   
-  function game(){
-    for (let i = 0; i < 5; i++){
+    return playerScore
+}
+
+  // Play 5 rounds of game and keep the scores 
+function game(){
+    score = 0
+    for (let i = 0; i < 2; i++){
         const playerSelection = prompt("Choice paper, scissors or rock")
         const computerSelection = getComputerChoice()
-        playRound(playerSelection, computerSelection)
-    }
-  }
+        playScore = playRound(playerSelection, computerSelection)
+        score = score + playScore
 
-//   console.log(playRound(playerSelection, computerSelection));
-game()
+    }
+    console.log("You won " + score + " games!")
+}
+const playerSelection = prompt("Choice paper, scissors or rock")
+const computerSelection = getComputerChoice()
+playScore = playRound(playerSelection, computerSelection)
+
+// game()
