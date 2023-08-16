@@ -34,35 +34,11 @@ and computerSelection - and then return a string that declares the
     // Change the selection to uppercase
     let computerSelectionUpper = computerSelection.toUpperCase()
 
-
-    let playerSelectionNumber =0
-    let computerSelectionNumber = 0
-
     // Convert rock, paper, scissors to respective numbers for the player
-    switch(playerSelectionUpper) {
-        case "ROCK":
-            playerSelectionNumber = 3
-            break
-        case "SISSORS":
-            playerSelectionNumber = 2
-            break
-        case "PAPER":
-            playerSelectionNumber = 1
-            break
-    }
-    
+    let playerSelectionNumber = convertChoice(playerSelectionUpper)
+
     // Convert rock, paper, scissors to respective numbers for the computer
-    switch(computerSelectionUpper) {
-        case "ROCK":
-            computerSelectionNumber = 3
-            break
-        case "SISSORS":
-            computerSelectionNumber = 2
-            break
-        case "PAPER":
-            computerSelectionNumber = 1
-            break
-    }
+    let computerSelectionNumber = convertChoice(computerSelectionUpper)
 
     // Calculate the differences between computer's choice and player's choice
     let playResult = computerSelectionNumber - playerSelectionNumber
