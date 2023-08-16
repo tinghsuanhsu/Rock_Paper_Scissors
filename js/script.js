@@ -55,7 +55,7 @@ and computerSelection - and then return a string that declares the
    
   function game(){
     for (let i = 0; i < 5; i++){
-        const playerSelection = "Rock"
+        const playerSelection = prompt("Choice paper, scissors or rock")
         const computerSelection = getComputerChoice()
         playRound(playerSelection, computerSelection)
     }
