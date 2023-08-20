@@ -1,5 +1,25 @@
+body {
+    padding: auto;
+    background-color: #ff4e00;
+    background-image: linear-gradient(270deg, #ff4e00 0%, #ec9f05 74%);
+}
 h1, h3{
     text-align: center;
     font-family: Segoe UI, sans-serif;
+    color: whitesmoke;
 }
 
+div {
+    display: flex;
+    margin-top: 100px;
+    text-align: center;
+    font-family: Segoe UI, sans-serif;
+    color: whitesmoke;
+    justify-content: space-evenly;
+
+}
+
+#rock, #paper, #scissors {
+    font-size: 50px;
+    
+}
