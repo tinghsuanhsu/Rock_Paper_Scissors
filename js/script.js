@@ -18,8 +18,8 @@ function convertChoice(choice){
     } 
 }
 
-// A function that plays a single round of Rock Paper Scissors. 
 
+// A function that plays a single round of Rock Paper Scissors. 
 function playRound(playerSelection, computerSelection) {
     // Change the selection to uppercase
     let playerSelectionUpper = playerSelection.toUpperCase()
@@ -51,10 +51,10 @@ function playRound(playerSelection, computerSelection) {
 }
 
   // Play 5 rounds of game and keep the scores 
-function game(){
+function game(numOfRound){
     score = 0
-    for (let i = 0; i < 2; i++){
-        const playerSelection = prompt('Choice paper, scissors or rock')
+    for (let i = 0; i < numOfRound; i++){
+        // const playerSelection = prompt('Choice paper, scissors or rock')
         const computerSelection = getComputerChoice()
         playScore = playRound(playerSelection, computerSelection)
         score = score + playScore
@@ -63,5 +63,14 @@ function game(){
     console.log(`You won ${score} games!`)
 }
 
+const playerSelection = document.querySelectorAll('button')
 
-game()
+function doSomethingWhenClick(e){
+    console.log(e.target.textContent)
+    const displaySelection = document.querySelector('#selected')
+    displaySelection.textContent = e.target.textContent
+
+}
+playerSelection.forEach(selection => selection.addEventListener('click', doSomethingWhenClick))
+
+// game(numOfRound)
