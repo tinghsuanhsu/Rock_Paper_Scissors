@@ -21,6 +21,7 @@ function convertChoice(choice){
 
 // A function that plays a single round of Rock Paper Scissors. 
 function playRound(playerSelection, computerSelection) {
+    
     // Change the selection to uppercase
     let playerSelectionUpper = playerSelection.toUpperCase()
     // Change the selection to uppercase
@@ -36,41 +37,59 @@ function playRound(playerSelection, computerSelection) {
     let playResult = computerSelectionNumber - playerSelectionNumber
 
     // Keep player's score
-    let playerScore = 0
+    // let playerScore = 0
 
     // Evaluate the differences to determine who wins and print out the round
     if (playResult > 1 || playResult === -2){ 
         console.log(`You lose! ${computerSelection} beats ${playerSelection}`)
+        return false
     } else if (playResult === 0) {
         console.log(`Draw! You both play ${computerSelection}`)
+        return false
     } else {
         console.log(`You win! ${playerSelection} beats ${computerSelection}`)
-        ++playerScore
+        // ++playerScore
+        return true
     }
-    return playerScore
+    // return playerScore
 }
+
+
 
   // Play 5 rounds of game and keep the scores 
 function game(numOfRound){
-    score = 0
+    let score = 0
     for (let i = 0; i < numOfRound; i++){
         // const playerSelection = prompt('Choice paper, scissors or rock')
+        
         const computerSelection = getComputerChoice()
-        playScore = playRound(playerSelection, computerSelection)
-        score = score + playScore
+        const playerSelections = document.querySelectorAll('button')
+        const displaySelection = document.querySelector('#selected')
 
+        // listen for the player choice to play against the computer and keep the scores
+        playerSelections.forEach(selection => selection.addEventListener('click', (e)=> {
+            let playerSelection = e.target.textContent // grab the selection
+            displaySelection.textContent = playerSelection // display the selection 
+
+            playResult= playRound(playerSelection, computerSelection)
+            console.log(playResult)
+            if (playResult) {
+                score++
+            } 
+            console.log(score) 
+        }))
+        
     }
+    return 
     console.log(`You won ${score} games!`)
 }
 
-const playerSelection = document.querySelectorAll('button')
-
+// a test function to display the selection
 function doSomethingWhenClick(e){
     console.log(e.target.textContent)
     const displaySelection = document.querySelector('#selected')
     displaySelection.textContent = e.target.textContent
 
 }
-playerSelection.forEach(selection => selection.addEventListener('click', doSomethingWhenClick))
 
-// game(numOfRound)
+game(2)
