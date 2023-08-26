@@ -1,7 +1,7 @@
 // global variables
 // play game
     // however, if player clicks reset 
-    //      reset the scores and start from scratch
+    //      reset the scores and start from scratch --> DONE
     // else starting a game for n rounds
     //      in each round
     //          compare player choice and computer choice 
@@ -12,19 +12,17 @@
 const choiceList= ['Paper', 'Scissors', 'Rock'];
 let playerScore = 0;
 let computerScore = 0;
-
+let defaultScoreText = "?";
 
 const computerSelection = getComputerChoice()
 let playerScoreText = document.querySelector('#player-score')
 let computerScoreText = document.querySelector('#computer-score')
-
-
-
+playerScoreText.textContent = defaultScoreText; // display the selection 
+computerScoreText.textContent = defaultScoreText; // display the selection 
 
 function resetGame(){
     let playerScore = 0;
     let computerScore = 0;
-    let defaultScoreText = "?";
     playerScoreText.textContent = defaultScoreText; // display the selection 
     computerScoreText.textContent = defaultScoreText; // display the selection 
     // reset scores
@@ -73,14 +71,15 @@ function playRound(playerSelection, computerSelection) {
     // Evaluate the differences to determine who wins and print out the round
     if (playResult > 1 || playResult === -2){ 
         console.log(`You lose! ${computerSelection} beats ${playerSelection}`)
-        return false
+        computerScore++
+        // return computerScore
     } else if (playResult === 0) {
         console.log(`Draw! You both play ${computerSelection}`)
-        return false
+        // return false
     } else {
         console.log(`You win! ${playerSelection} beats ${computerSelection}`)
-        // ++playerScore
-        return true
+        playerScore++
+        // return playerScore
     }
     // return playerScore
 }
@@ -90,15 +89,21 @@ function playRound(playerSelection, computerSelection) {
   // Play 5 rounds of game and keep the scores 
 function game(){
    
-    const playerSelections = document.querySelectorAll('button')
-    playerSelections.forEach(selection => selection.addEventListener('click', (e)=> {
+    const buttons = document.querySelectorAll('button')
+    buttons.forEach(selection => selection.addEventListener('click', (e)=> {
         if (e.target.id == "resetbtn") {
             // reset the scores
             resetGame()
             return
-        }
+        } else {
+            let playerSelection = e.target.textContent
+            let computerSelection = getComputerChoice()
+            playRound(playerSelection, computerSelection) 
+            computerScoreText.textContent = computerScore
+            playerScoreText.textContent = playerScore
+        }   
         }))
-    
+} 
     // let score = 0
     // for (let i = 0; i < numOfRound; i++){
     //     // const playerSelection = prompt('Choice paper, scissors or rock')
@@ -129,7 +134,7 @@ function game(){
     // }
     // return 
     // console.log(`You won ${score} games!`)
-}
+
 
 // a test function to display the selection
 function doSomethingWhenClick(e){
