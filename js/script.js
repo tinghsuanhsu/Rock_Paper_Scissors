@@ -14,21 +14,32 @@ let playerScore = 0;
 let computerScore = 0;
 let defaultScoreText = "?";
 
-const computerSelection = getComputerChoice()
+
+let computerSelection = getComputerChoice()
+let selectText = document.querySelector('#selected')
 let playerScoreText = document.querySelector('#player-score')
 let computerScoreText = document.querySelector('#computer-score')
+let numOfGame = document.querySelector("#num-of-game")
 playerScoreText.textContent = defaultScoreText; // display the selection 
 computerScoreText.textContent = defaultScoreText; // display the selection 
 
+
 function resetGame(){
-    let playerScore = 0;
-    let computerScore = 0;
+    playerScore = 0;
+    computerScore = 0;
     playerScoreText.textContent = defaultScoreText; // display the selection 
     computerScoreText.textContent = defaultScoreText; // display the selection 
+    selectText.textContent = "Start";
     // reset scores
-    // reset text
-    
+    // reset text   
 }
+
+
+function annouceGameResult() {
+    var win = window.open("", "Title", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=780, height=200, top="+(screen.height-400)+", left="+(screen.width-840));
+    win.document.body.innerHTML = "Play Again?";
+  }
+
 // Randomly return paper, rock or scissors as computer's choice
 function getComputerChoice(){
     randomNumber = Math.floor(Math.random() * choiceList.length); 
@@ -72,23 +83,20 @@ function playRound(playerSelection, computerSelection) {
     if (playResult > 1 || playResult === -2){ 
         console.log(`You lose! ${computerSelection} beats ${playerSelection}`)
         computerScore++
-        // return computerScore
     } else if (playResult === 0) {
         console.log(`Draw! You both play ${computerSelection}`)
-        // return false
     } else {
         console.log(`You win! ${playerSelection} beats ${computerSelection}`)
         playerScore++
-        // return playerScore
     }
-    // return playerScore
 }
 
 
 
-  // Play 5 rounds of game and keep the scores 
-function game(){
-   
+
+// Play 5 rounds of game and keep the scores 
+function game(winScore){
+    numOfGame.textContent = winScore
     const buttons = document.querySelectorAll('button')
     buttons.forEach(selection => selection.addEventListener('click', (e)=> {
         if (e.target.id == "resetbtn") {
@@ -97,51 +105,24 @@ function game(){
             return
         } else {
             let playerSelection = e.target.textContent
+            selectText.textContent = e.target.textContent
             let computerSelection = getComputerChoice()
             playRound(playerSelection, computerSelection) 
+
             computerScoreText.textContent = computerScore
             playerScoreText.textContent = playerScore
+
+            if (computerScore === winScore) {
+                selectText.textContent = "You Lost!"
+                // annouceGameResult()
+            } else if (playerScore === winScore) {
+                selectText.textContent = "You Win!"
+                // annouceGameResult()
+            }
+
         }   
-        }))
+    }
+    ))
 } 
-    // let score = 0
-    // for (let i = 0; i < numOfRound; i++){
-    //     // const playerSelection = prompt('Choice paper, scissors or rock')
-        
-    //     const computerSelection = getComputerChoice()
-    //     const playerSelections = document.querySelectorAll('button')
-    //     const displaySelection = document.querySelector('#selected')
 
-    //     // listen for the player choice to play against the computer and keep the scores
-    //     playerSelections.forEach(selection => selection.addEventListener('click', (e)=> {
-    //         let playerSelection = e.target.textContent // grab the selection
-    //         let playerScore = document.querySelector('#player-score')
-    //         let computerScore = document.querySelector('#computer-score')
-    //         displaySelection.textContent = playerSelection // display the selection 
-
-    //         playResult= playRound(playerSelection, computerSelection)
-    //         console.log(playResult)
-    //         if (playResult) {
-    //             score++
-    //         } 
-    //         console.log(score) 
-            
-    //         playerScore.textContent = score
-    //         computerScore.textContent = numOfRound - score  
-
-    //     }))
-        
-    // }
-    // return 
-    // console.log(`You won ${score} games!`)
-
-
-// a test function to display the selection
-function doSomethingWhenClick(e){
-    console.log(e.target.textContent)
-    const displaySelection = document.querySelector('#selected')
-    displaySelection.textContent = e.target.textContent
-
-}
-
-game()
+game(2)
