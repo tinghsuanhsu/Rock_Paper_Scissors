@@ -1,39 +1,27 @@
 // global variables
-// play game
-    // however, if player clicks reset 
-    //      reset the scores and start from scratch --> DONE
-    // else starting a game for n rounds
-    //      in each round
-    //          compare player choice and computer choice 
-    //          set the score, display the score
-    // stop when n rounds played
-    // dont respond to any clicks, only respond to reset
-
 const choiceList= ['Paper', 'Scissors', 'Rock'];
 let playerScore = 0;
 let computerScore = 0;
 let defaultScoreText = "?";
 
-
-let computerSelection = getComputerChoice()
 let selectText = document.querySelector('#selected')
 let playerScoreText = document.querySelector('#player-score')
 let computerScoreText = document.querySelector('#computer-score')
 let numOfGame = document.querySelector("#num-of-game")
+let computerSelection = getComputerChoice() // get computer choice
+
+const buttons = document.querySelectorAll('button')
+
 playerScoreText.textContent = defaultScoreText; // display the selection 
 computerScoreText.textContent = defaultScoreText; // display the selection 
 
-
 function resetGame(){
-    playerScore = 0;
-    computerScore = 0;
+    playerScore = 0; // reset score to 0
+    computerScore = 0; // reset score to 0
     playerScoreText.textContent = defaultScoreText; // display the selection 
     computerScoreText.textContent = defaultScoreText; // display the selection 
     selectText.textContent = "Start";
-    // reset scores
-    // reset text   
 }
-
 
 function annouceGameResult() {
     var win = window.open("", "Title", "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=780, height=200, top="+(screen.height-400)+", left="+(screen.width-840));
@@ -58,26 +46,19 @@ function convertChoice(choice){
     } 
 }
 
-
 // A function that plays a single round of Rock Paper Scissors. 
 function playRound(playerSelection, computerSelection) {
     
     // Change the selection to uppercase
     let playerSelectionUpper = playerSelection.toUpperCase()
-    // Change the selection to uppercase
     let computerSelectionUpper = computerSelection.toUpperCase()
 
-    // Convert rock, paper, scissors to respective numbers for the player
+    // Convert rock, paper, scissors to respective numbers for the player and computer
     let playerSelectionNumber = convertChoice(playerSelectionUpper)
-
-    // Convert rock, paper, scissors to respective numbers for the computer
     let computerSelectionNumber = convertChoice(computerSelectionUpper)
 
     // Calculate the differences between computer's choice and player's choice
     let playResult = computerSelectionNumber - playerSelectionNumber
-
-    // Keep player's score
-    // let playerScore = 0
 
     // Evaluate the differences to determine who wins and print out the round
     if (playResult > 1 || playResult === -2){ 
@@ -91,26 +72,24 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-
-
-
-// Play 5 rounds of game and keep the scores 
+// Play n rounds of game and keep the scores 
 function game(winScore){
-    numOfGame.textContent = winScore
-    const buttons = document.querySelectorAll('button')
+    numOfGame.textContent = winScore // display the winning criteria
+
     buttons.forEach(selection => selection.addEventListener('click', (e)=> {
+        // if player doesn't reset the game before one side wins/loses
         if (e.target.id == "resetbtn") {
-            // reset the scores
             resetGame()
             return
         } else {
-            let playerSelection = e.target.textContent
-            selectText.textContent = e.target.textContent
-            let computerSelection = getComputerChoice()
-            playRound(playerSelection, computerSelection) 
+            let playerSelection = e.target.textContent // get player choice
+            selectText.textContent = e.target.textContent // display player choice
+            computerSelection = getComputerChoice() // get a new computer choice for each round
 
-            computerScoreText.textContent = computerScore
-            playerScoreText.textContent = playerScore
+            playRound(playerSelection, computerSelection) // play a round 
+
+            computerScoreText.textContent = computerScore // display computer score after the round
+            playerScoreText.textContent = playerScore // display player score after the round
 
             if (computerScore === winScore) {
                 selectText.textContent = "You Lost!"
