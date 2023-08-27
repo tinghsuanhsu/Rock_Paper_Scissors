@@ -8,20 +8,22 @@
 </head>
 <body>
     
+    
     <h1>Rock Paper Scissors Game</h1>
-    <h3>5 Games</h3>
-    <!-- <div id="selection">
-        <span id="rock">Rock</span>
-        <span id="paper">Paper</span>
-        <span id="scissors">Scissors</span>
-    </div> -->
+    <h3>Win <h3 id="num-of-game"></h3><h3> Games to Win!</h3>
+
     <div id="buttons">
         <button class="btn" id="rockbtn">Rock</button>
         <button class="btn" id="paperbtn">Paper</button>
         <button class="btn" id="scissorsbtn">Scissors</button>
+        <button class="btn" id="resetbtn">Reset</button>
     </div>
 
-    <div id="selected"></div>
+    <div id="selected">Start</div>
+    <div id="scores">
+        <span id="computer-score-text">Computer Score: <span id="computer-score"></span></span>
+        <span id="player-score-text">Player Score: <span id="player-score"></span></span>
+    </div>
     <script src = "js/script.js"></script>
 </body>
 </html>
